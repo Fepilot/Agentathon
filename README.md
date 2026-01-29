@@ -24,7 +24,7 @@
 
 ## �📖 What is an Agentathon?
 
-An **Agentathon** is a **1-2 day hands-on workshop** where participants learn to design, build, and deploy AI agents using **Microsoft Copilot Studio**. Developed by the Microsoft COI (Community of Interest) Team in Spain, this format has helped numerous organizations accelerate their AI adoption journey.
+An **Agentathon** is a **1-2 day hands-on workshop** where participants learn to design, build, and deploy AI agents using **Microsoft Copilot Studio**. Developed by the Microsoft COI (Copilot Onboarding Initiative) Team in Spain, this format has helped numerous organizations accelerate their AI adoption journey.
 
 ### Key Characteristics
 
