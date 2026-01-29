@@ -6,7 +6,23 @@
 
 ---
 
-## 📖 What is an Agentathon?
+## � Table of Contents
+
+- [📖 What is an Agentathon?](#-what-is-an-agentathon)
+- [🇪🇸 Why Spain? Global Leader in Agentic AI](#-why-spain-global-leader-in-agentic-ai)
+- [🎯 Proven Impact](#-proven-impact)
+- [📚 Workshop Materials](#-workshop-materials)
+- [🚀 How to Run an Agentathon](#-how-to-run-an-agentathon)
+- [🛠️ Technical Requirements](#️-technical-requirements)
+- [🏆 Success Stories](#-success-stories)
+- [🔗 Resources](#-resources)
+- [👥 Who is Behind This Project?](#-who-is-behind-this-project)
+- [🤝 Contributing](#-contributing)
+- [📂 Repository Structure](#-repository-structure)
+
+---
+
+## �📖 What is an Agentathon?
 
 An **Agentathon** is a **1-2 day hands-on workshop** where participants learn to design, build, and deploy AI agents using **Microsoft Copilot Studio**. Developed by the Microsoft COI (Community of Interest) Team in Spain, this format has helped numerous organizations accelerate their AI adoption journey.
 
