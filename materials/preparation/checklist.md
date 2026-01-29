@@ -22,6 +22,7 @@ Use this checklist to ensure you're fully prepared for your Agentathon event.
 ## 📅 4 Weeks Before
 
 ### Environment Setup
+- [ ] **Create CDX Demo Tenant** - [See CDX Setup Guide](cdx-demo-tenant-setup.md) | [Download PDF](CDX-Demo-Tenant-Setup.pdf)
 - [ ] Verify Copilot Studio licenses for all participants
 - [ ] Set up development environments
 - [ ] Test connectivity and access

@@ -71,7 +71,10 @@ Everything you need to run your own Agentathon:
 |----------|-------------|
 | [Preparation Checklist](materials/preparation/checklist.md) | Week-by-week preparation tasks |
 | [Environment Setup](materials/preparation/environment-setup.md) | Technical requirements and setup guide |
+| [**CDX Demo Tenant Setup**](materials/preparation/cdx-demo-tenant-setup.md) | 🔑 **Essential** - How to create a demo environment |
 | [Communication Templates](materials/preparation/communication-templates.md) | Email templates for invitations and follow-ups |
+
+> 💡 **Important**: Setting up a CDX Demo Tenant is crucial for a successful Agentathon. It provides pre-configured licenses and sample data. [Download the PDF guide](materials/preparation/CDX-Demo-Tenant-Setup.pdf) for detailed instructions.
 
 ### 2️⃣ Prerequisites (Share 1 week before)
 
@@ -130,6 +133,15 @@ Post-event → Document outcomes, plan production path
 ---
 
 ## 🛠️ Technical Requirements
+
+### CDX Demo Tenant (Recommended)
+
+For the best Agentathon experience, set up a **CDX Demo Tenant** which provides:
+- Pre-configured Microsoft 365 and Power Platform licenses
+- Isolated environment for safe experimentation
+- Sample data ready to use
+
+📄 **[CDX Demo Tenant Setup Guide](materials/preparation/cdx-demo-tenant-setup.md)** | [Download PDF](materials/preparation/CDX-Demo-Tenant-Setup.pdf)
 
 ### For Organizers
 - Microsoft 365 tenant with Copilot Studio licenses
