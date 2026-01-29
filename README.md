@@ -183,7 +183,7 @@ For the best Agentathon experience, set up a **CDX Demo Tenant** which provides:
 
 ## 👥 Who is Behind This Project?
 
-The Agentathon initiative was created and is maintained by the **Microsoft Spain V-Team**, a cross-functional group dedicated to driving AI adoption through innovative workshop formats.
+The Agentathon initiative was created and is maintained by the **Copilot Onboarding Initiative of Spain (aka. COI)**, a cross-functional group dedicated to driving AI adoption through innovative workshop formats.
 
 ### 🏆 V-Team Members
 
