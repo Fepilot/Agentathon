@@ -229,6 +229,7 @@ The original concept and vision for the Agentathon format:
 - Luis Ángel Velasco González
 - Alberto Álvaro Cabezas
 - Fernando Berdugo Manzano
+- Alfredo Jiménez Martín
 - Magda Teruel
 
 ### 🎤 Facilitators
