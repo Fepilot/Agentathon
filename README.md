@@ -181,6 +181,64 @@ For the best Agentathon experience, set up a **CDX Demo Tenant** which provides:
 
 ---
 
+## 👥 Who is Behind This Project?
+
+The Agentathon initiative was created and is maintained by the **Microsoft Spain V-Team**, a cross-functional group dedicated to driving AI adoption through innovative workshop formats.
+
+### 🏆 V-Team Members
+
+| Name |
+|------|
+| Alberto Álvaro Cabezas |
+| Alberto Camina |
+| Alejandro Cabrera |
+| Alfredo Jiménez Martín |
+| Antonio Cruz Cruz Conde |
+| Carlos Yáñez |
+| Fernando Berdugo Manzano |
+| Fran Gil Arrogante |
+| Juan Chinchilla Alvargonzalez |
+| Luis Ángel Velasco González |
+| Magda Teruel |
+| Paloma Gomez Zamorano |
+| Rafael Ríos Sacristán |
+
+### 💡 Ideators
+
+The original concept and vision for the Agentathon format:
+
+- Antonio Cruz Cruz Conde
+- Juan Chinchilla Alvargonzalez
+- Paloma Gomez Zamorano
+- Luis Ángel Velasco González
+- Alberto Álvaro Cabezas
+- Fernando Berdugo Manzano
+- Magda Teruel
+
+### 🎤 Facilitators
+
+Leading workshops and guiding participants:
+
+- Alfredo Jiménez Martín
+- Alejandro Cabrera
+- Raúl Frutos Quesada
+- Marco Orozco
+- Paloma Gomez Zamorano
+- Luis Ángel Velasco González
+
+### ⚙️ Executors (Operations / Logistics / Execution)
+
+Making every event run smoothly:
+
+- Juan Chinchilla Alvargonzalez
+- Fran Gil Arrogante
+- Carlos Yáñez
+- Paloma Gomez Zamorano
+- Luis Ángel Velasco González
+- Rafael Ríos Sacristán
+
+---
+
 ## 👥 About This Initiative
 
 The Agentathon format was developed by the **Microsoft COI Team in Spain** to accelerate AI agent adoption across enterprise customers.
