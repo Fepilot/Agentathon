@@ -6,11 +6,12 @@
 
 ---
 
-## � Table of Contents
+## 📋 Table of Contents
 
 - [📖 What is an Agentathon?](#-what-is-an-agentathon)
 - [🇪🇸 Why Spain? Global Leader in Agentic AI](#-why-spain-global-leader-in-agentic-ai)
 - [🎯 Proven Impact](#-proven-impact)
+- [🚀 Frontier Firm Mapping](#-frontier-firm-mapping) ⭐ **NEW**
 - [📚 Workshop Materials](#-workshop-materials)
 - [🚀 How to Run an Agentathon](#-how-to-run-an-agentathon)
 - [🛠️ Technical Requirements](#️-technical-requirements)
@@ -22,7 +23,7 @@
 
 ---
 
-## �📖 What is an Agentathon?
+## 📖 What is an Agentathon?
 
 An **Agentathon** is a **1-2 day hands-on workshop** where participants learn to design, build, and deploy AI agents using **Microsoft Copilot Studio**. Developed by the Microsoft COI (Copilot Onboarding Initiative) Team in Spain, this format has helped numerous organizations accelerate their AI adoption journey.
 
@@ -74,6 +75,48 @@ One of our flagship events with **Bankinter**, one of Spain's leading banks:
 > *"The Agentathon format allowed our teams to go from concept to working prototype in just two days."*
 
 [Read full success story →](success-stories/spain/bankinter.md)
+
+---
+
+## 🚀 Frontier Firm Mapping
+
+> ⭐ **NEW**: Connect your Agentathon to enterprise AI transformation strategy
+
+The **Frontier Firm Mapping** section aligns the Agentathon methodology with the **Frontier Firm Playbook** framework, providing strategic guidance for organizations transforming their operations through AI agents.
+
+### What's Included
+
+| Component | Description |
+|-----------|-------------|
+| [**Three Horizons Framework**](frontier-firm-mapping/horizons.md) | H1 (Individual) → H2 (Workflow) → H3 (Autonomous) classification |
+| [**Trust & Safety Framework**](frontier-firm-mapping/trust-framework.md) | L1 (Shadowing) → L4 (Trusted) with graduation criteria |
+| [**ROI Calculator**](frontier-firm-mapping/roi-calculator.md) | Templates for measuring and presenting business value |
+| [**Scenario Playbooks**](frontier-firm-mapping/scenarios/) | Complete workshop guides for 5 key patterns |
+| [**Agent Templates**](frontier-firm-mapping/patterns/) | JSON configurations for quick agent setup |
+
+### The Three Horizons at a Glance
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│  H3: Autonomous Agents    │ AI as digital employees        │
+├───────────────────────────┼─────────────────────────────────┤
+│  H2: Workflow Automation  │ Multi-step automated processes │
+├───────────────────────────┼─────────────────────────────────┤
+│  H1: Individual Productivity │ AI assistants for tasks     │
+└─────────────────────────────────────────────────────────────┘
+```
+
+### Ready-to-Use Scenarios
+
+| Scenario | Pattern | Horizon | Duration |
+|----------|---------|---------|----------|
+| [Customer Service Excellence](frontier-firm-mapping/scenarios/customer-service.md) | Customer Support | H2 | 2 days |
+| [HR Operations Transformation](frontier-firm-mapping/scenarios/hr-operations.md) | HR Operations | H1-H2 | 1-2 days |
+| [IT Service Desk Automation](frontier-firm-mapping/scenarios/it-service-desk.md) | IT Service Mgmt | H2 | 2 days |
+| [Sales Enablement Agent](frontier-firm-mapping/scenarios/sales-enablement.md) | Sales Enablement | H1-H2 | 2 days |
+| [Back-Office Operations](frontier-firm-mapping/scenarios/back-office.md) | Operations | H2-H3 | 2 days |
+
+[**Explore Full Frontier Firm Mapping →**](frontier-firm-mapping/README.md)
 
 ---
 
@@ -289,6 +332,7 @@ Agentathon/
 │   ├── preparation/                    # Pre-event materials
 │   │   ├── checklist.md
 │   │   ├── environment-setup.md
+│   │   ├── cdx-demo-tenant-setup.md
 │   │   └── communication-templates.md
 │   ├── prerequisites/                  # Share before the event
 │   │   ├── intro-to-agents.md
@@ -298,6 +342,23 @@ Agentathon/
 │       ├── agenda.md
 │       ├── exercises.md
 │       └── demo-scenarios.md
+├── frontier-firm-mapping/              # ⭐ NEW: Enterprise AI transformation
+│   ├── README.md                       # Overview & introduction
+│   ├── horizons.md                     # Three Horizons (H1/H2/H3)
+│   ├── trust-framework.md              # Trust levels (L1-L4)
+│   ├── roi-calculator.md               # ROI measurement templates
+│   ├── scenarios/                      # Complete workshop scenarios
+│   │   ├── customer-service.md
+│   │   ├── hr-operations.md
+│   │   ├── it-service-desk.md
+│   │   ├── sales-enablement.md
+│   │   └── back-office.md
+│   └── patterns/                       # Agent configuration templates
+│       ├── customer-service-template.json
+│       ├── hr-operations-template.json
+│       ├── it-service-template.json
+│       ├── sales-enablement-template.json
+│       └── back-office-template.json
 ├── success-stories/
 │   └── spain/                          # Customer success stories
 │       ├── bankinter.md

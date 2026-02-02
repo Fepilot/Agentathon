@@ -1,0 +1,218 @@
+{
+  "pattern_info": {
+    "name": "Sales Enablement",
+    "pattern_number": 8,
+    "description": "AI agent for supporting sales teams with information, proposals, and CRM assistance",
+    "typical_horizon": "H1-H2",
+    "recommended_trust_level": "L1-L2",
+    "frontier_firm_reference": "Pattern 8 - Sales Enablement Automation"
+  },
+
+  "agent_config": {
+    "name": "Sales Assistant",
+    "description": "Helps sales reps with product info, proposal drafting, meeting prep, and CRM updates",
+    "icon": "📈",
+    "primary_language": "en-US",
+    "fallback_behavior": "Offer to search or create task",
+    "personality": "Efficient, knowledgeable, proactive"
+  },
+
+  "topics": [
+    {
+      "name": "Product Information",
+      "trigger_phrases": [
+        "Tell me about product",
+        "Product features",
+        "Product pricing",
+        "Compare products",
+        "What does it do"
+      ],
+      "flow_description": "Search product catalog and provide detailed information",
+      "knowledge_source": "product_catalog",
+      "trust_level": "L3"
+    },
+    {
+      "name": "Meeting Preparation",
+      "trigger_phrases": [
+        "Prepare me for meeting with",
+        "Meeting brief",
+        "Customer background",
+        "What should I know about"
+      ],
+      "flow_description": "Pull CRM data, recent interactions, open opportunities",
+      "requires_action": "crm_lookup",
+      "trust_level": "L2"
+    },
+    {
+      "name": "Draft Proposal",
+      "trigger_phrases": [
+        "Create proposal",
+        "Draft proposal",
+        "Need a proposal for",
+        "Proposal template"
+      ],
+      "flow_description": "Generate proposal draft based on customer and products",
+      "requires_action": "document_generation",
+      "trust_level": "L2",
+      "output": "draft_only"
+    },
+    {
+      "name": "Competitive Information",
+      "trigger_phrases": [
+        "Competitor comparison",
+        "How do we compare to",
+        "Battle card",
+        "Win against"
+      ],
+      "flow_description": "Provide competitive positioning and battle cards",
+      "knowledge_source": "competitive_intel",
+      "trust_level": "L2"
+    },
+    {
+      "name": "CRM Update",
+      "trigger_phrases": [
+        "Update opportunity",
+        "Log activity",
+        "Update CRM",
+        "Record meeting notes"
+      ],
+      "flow_description": "Suggest CRM updates for user approval",
+      "requires_action": "crm_update",
+      "trust_level": "L2",
+      "requires_approval": true
+    },
+    {
+      "name": "Case Studies",
+      "trigger_phrases": [
+        "Case study for",
+        "Customer success story",
+        "Reference customer",
+        "Similar customer"
+      ],
+      "flow_description": "Find relevant case studies by industry or use case",
+      "knowledge_source": "case_studies",
+      "trust_level": "L3"
+    }
+  ],
+
+  "knowledge_sources": [
+    {
+      "name": "product_catalog",
+      "type": "sharepoint",
+      "description": "Products, features, specifications, pricing",
+      "update_frequency": "weekly"
+    },
+    {
+      "name": "competitive_intel",
+      "type": "sharepoint",
+      "description": "Competitor analysis, battle cards, positioning",
+      "update_frequency": "monthly"
+    },
+    {
+      "name": "case_studies",
+      "type": "sharepoint",
+      "description": "Customer success stories by industry and use case",
+      "update_frequency": "monthly"
+    },
+    {
+      "name": "sales_playbooks",
+      "type": "document",
+      "description": "Sales methodologies, objection handling, pricing guidance",
+      "update_frequency": "quarterly"
+    }
+  ],
+
+  "actions": [
+    {
+      "name": "crm_lookup",
+      "type": "connector",
+      "system": "Dynamics 365 / Salesforce",
+      "description": "Retrieve customer and opportunity data",
+      "access": "read_only",
+      "outputs": ["customer_info", "opportunities", "activities", "contacts"]
+    },
+    {
+      "name": "crm_update",
+      "type": "connector",
+      "system": "Dynamics 365 / Salesforce",
+      "description": "Update opportunity or log activity",
+      "access": "write_with_approval",
+      "requires_approval": true
+    },
+    {
+      "name": "document_generation",
+      "type": "power_automate",
+      "description": "Generate proposal document from template",
+      "outputs": ["draft_document_link"],
+      "output_type": "draft_only"
+    }
+  ],
+
+  "trust_config": {
+    "initial_level": 2,
+    
+    "autonomous_actions": [
+      "search_products",
+      "retrieve_customer_data",
+      "find_case_studies",
+      "provide_competitive_info"
+    ],
+    
+    "requires_approval": [
+      "update_crm_record",
+      "send_document",
+      "schedule_meeting",
+      "apply_discount"
+    ],
+    
+    "draft_only": [
+      "proposals",
+      "emails",
+      "quotes"
+    ],
+    
+    "read_only_systems": [
+      "crm_customer_data",
+      "crm_opportunities"
+    ]
+  },
+
+  "success_metrics": {
+    "primary": [
+      {
+        "name": "Time Saved per Rep",
+        "target": "5 hours/week",
+        "description": "Reduction in administrative tasks"
+      },
+      {
+        "name": "Proposal Creation Time",
+        "target": "50% reduction",
+        "description": "Time from request to draft"
+      },
+      {
+        "name": "Information Accuracy",
+        "target": "98%",
+        "description": "Correct product and pricing info"
+      },
+      {
+        "name": "Sales Rep Satisfaction",
+        "target": "4.5/5",
+        "description": "User feedback score"
+      }
+    ],
+    "secondary": [
+      {
+        "name": "CRM Data Quality",
+        "target": "20% improvement",
+        "description": "More complete records"
+      },
+      {
+        "name": "Adoption Rate",
+        "target": "80%",
+        "description": "Sales team using agent regularly"
+      }
+    ]
+  },
+
+  "implementation_notes": "Start with read-only CRM access and information retrieval. Add proposal drafting as second phase. CRM write access should only be added after trust is established. Always present proposals as drafts requiring human review."
+}

@@ -1,0 +1,196 @@
+{
+  "pattern_info": {
+    "name": "IT Service Management",
+    "pattern_number": 7,
+    "description": "AI agent for IT support, troubleshooting, and service requests",
+    "typical_horizon": "H2",
+    "recommended_trust_level": "L2-L3",
+    "frontier_firm_reference": "Pattern 7 - IT Service Management Automation"
+  },
+
+  "agent_config": {
+    "name": "IT Support Agent",
+    "description": "Handles IT support requests, guides troubleshooting, and manages service tickets",
+    "icon": "🔧",
+    "primary_language": "en-US",
+    "fallback_behavior": "Create ticket for IT team",
+    "personality": "Technical, patient, solution-oriented"
+  },
+
+  "topics": [
+    {
+      "name": "Password Reset",
+      "trigger_phrases": [
+        "Reset my password",
+        "Forgot password",
+        "Can't log in",
+        "Password expired",
+        "Account locked"
+      ],
+      "flow_description": "Verify identity and initiate password reset",
+      "requires_action": "password_reset",
+      "trust_level": "L3",
+      "security_verification": true
+    },
+    {
+      "name": "VPN Issues",
+      "trigger_phrases": [
+        "VPN not working",
+        "Can't connect to VPN",
+        "VPN slow",
+        "Remote access"
+      ],
+      "flow_description": "Guide through VPN troubleshooting steps",
+      "knowledge_source": "troubleshooting_guides",
+      "trust_level": "L2"
+    },
+    {
+      "name": "Software Installation",
+      "trigger_phrases": [
+        "Install software",
+        "Need application",
+        "Software request",
+        "Can't install"
+      ],
+      "flow_description": "Check authorization and guide installation or create request",
+      "requires_action": "software_request",
+      "trust_level": "L2"
+    },
+    {
+      "name": "Hardware Issues",
+      "trigger_phrases": [
+        "Computer not working",
+        "Laptop broken",
+        "Monitor issue",
+        "Keyboard not working"
+      ],
+      "flow_description": "Basic troubleshooting, then create hardware ticket",
+      "trust_level": "L2",
+      "requires_ticket": true
+    },
+    {
+      "name": "Network Connectivity",
+      "trigger_phrases": [
+        "No internet",
+        "WiFi not working",
+        "Network slow",
+        "Can't connect"
+      ],
+      "flow_description": "Check outages, guide basic troubleshooting",
+      "requires_action": "check_network_status",
+      "trust_level": "L2"
+    },
+    {
+      "name": "Security Incident",
+      "trigger_phrases": [
+        "Suspicious email",
+        "Think I was hacked",
+        "Phishing",
+        "Virus",
+        "Security concern"
+      ],
+      "flow_description": "Immediate escalation to security team",
+      "trust_level": "L1",
+      "auto_escalate": true,
+      "priority": "high"
+    }
+  ],
+
+  "actions": [
+    {
+      "name": "password_reset",
+      "type": "connector",
+      "system": "Active Directory / Identity Provider",
+      "description": "Verify user and initiate password reset",
+      "inputs": ["employee_id", "email"],
+      "outputs": ["reset_link", "confirmation"],
+      "security_requirements": ["identity_verification", "audit_logging"]
+    },
+    {
+      "name": "check_network_status",
+      "type": "api",
+      "system": "Network Monitoring",
+      "description": "Check for known outages or issues",
+      "outputs": ["status", "affected_areas", "eta"]
+    },
+    {
+      "name": "create_ticket",
+      "type": "connector",
+      "system": "ServiceNow / Jira",
+      "description": "Create IT support ticket",
+      "inputs": ["user_id", "issue_type", "description", "priority"],
+      "outputs": ["ticket_number", "sla_estimate"]
+    }
+  ],
+
+  "trust_config": {
+    "initial_level": 2,
+    
+    "autonomous_L3": [
+      "password_reset_with_verification",
+      "provide_troubleshooting_guides",
+      "check_system_status",
+      "common_issue_resolution"
+    ],
+    
+    "requires_ticket_L2": [
+      "hardware_issues",
+      "software_installation",
+      "access_requests",
+      "complex_network_issues"
+    ],
+    
+    "immediate_escalation": [
+      "security_incident",
+      "data_breach_suspected",
+      "executive_request",
+      "system_wide_outage"
+    ],
+    
+    "security_controls": {
+      "identity_verification": "required_for_password",
+      "audit_logging": "all_actions",
+      "rate_limiting": "3_per_hour",
+      "mfa_for_sensitive": true
+    }
+  },
+
+  "success_metrics": {
+    "primary": [
+      {
+        "name": "Auto-Resolution Rate",
+        "target": "40%",
+        "description": "Issues resolved without human intervention"
+      },
+      {
+        "name": "First Contact Resolution",
+        "target": "70%",
+        "description": "Resolved in first interaction"
+      },
+      {
+        "name": "Password Reset Success",
+        "target": "95%",
+        "description": "Successful automated resets"
+      },
+      {
+        "name": "User Satisfaction",
+        "target": "4.5/5",
+        "description": "Post-interaction rating"
+      }
+    ],
+    "secondary": [
+      {
+        "name": "Ticket Volume Reduction",
+        "target": "30%",
+        "description": "Fewer tickets created"
+      },
+      {
+        "name": "Resolution Time",
+        "target": "<5 min",
+        "description": "For auto-resolved issues"
+      }
+    ]
+  },
+
+  "implementation_notes": "Start with password reset (highest volume, well-defined process) before expanding to troubleshooting. Ensure robust identity verification before enabling any account actions. Maintain comprehensive audit trails for security compliance."
+}

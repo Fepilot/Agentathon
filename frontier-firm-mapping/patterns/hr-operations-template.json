@@ -1,0 +1,205 @@
+{
+  "pattern_info": {
+    "name": "HR Operations",
+    "pattern_number": 5,
+    "description": "AI agent for handling employee HR inquiries, policy questions, and process guidance",
+    "typical_horizon": "H1-H2",
+    "recommended_trust_level": "L1-L2",
+    "frontier_firm_reference": "Pattern 5 - HR Operations Automation"
+  },
+
+  "agent_config": {
+    "name": "HR Assistant",
+    "description": "Answers HR policy questions, guides employees through processes, and provides self-service support",
+    "icon": "👥",
+    "primary_language": "en-US",
+    "fallback_behavior": "Offer to connect with HR team",
+    "personality": "Friendly, helpful, confidential"
+  },
+
+  "topics": [
+    {
+      "name": "Time Off & Leave",
+      "trigger_phrases": [
+        "How many vacation days",
+        "Time off policy",
+        "Request PTO",
+        "Sick leave",
+        "Parental leave",
+        "Holiday schedule"
+      ],
+      "flow_description": "Provide leave policy information and guide to request system",
+      "knowledge_source": "hr_policies",
+      "trust_level": "L2"
+    },
+    {
+      "name": "Benefits Information",
+      "trigger_phrases": [
+        "What benefits do I have",
+        "Health insurance",
+        "Retirement plan",
+        "401k",
+        "Benefits enrollment",
+        "Dental coverage"
+      ],
+      "flow_description": "Explain benefits options and enrollment process",
+      "knowledge_source": "benefits_guide",
+      "trust_level": "L2"
+    },
+    {
+      "name": "Expense Policy",
+      "trigger_phrases": [
+        "Submit expense",
+        "Expense policy",
+        "Reimbursement",
+        "Travel policy",
+        "Per diem rates"
+      ],
+      "flow_description": "Explain expense policies and submission process",
+      "knowledge_source": "expense_policy",
+      "trust_level": "L2"
+    },
+    {
+      "name": "Onboarding Guide",
+      "trigger_phrases": [
+        "I'm new here",
+        "First day",
+        "Onboarding",
+        "New employee",
+        "Getting started"
+      ],
+      "flow_description": "Welcome new employees and guide through onboarding checklist",
+      "knowledge_source": "onboarding_materials",
+      "trust_level": "L2"
+    },
+    {
+      "name": "Policy Search",
+      "trigger_phrases": [
+        "What is the policy on",
+        "Company policy",
+        "Is it allowed to",
+        "What are the rules for"
+      ],
+      "flow_description": "Search HR knowledge base for relevant policies",
+      "knowledge_source": "all_policies",
+      "trust_level": "L2"
+    },
+    {
+      "name": "Sensitive Topics",
+      "trigger_phrases": [
+        "Complaint about",
+        "Harassment",
+        "Discrimination",
+        "Salary question",
+        "Termination",
+        "Disciplinary"
+      ],
+      "flow_description": "Acknowledge and route to appropriate HR contact",
+      "trust_level": "L1",
+      "auto_escalate": true
+    }
+  ],
+
+  "knowledge_sources": [
+    {
+      "name": "employee_handbook",
+      "type": "sharepoint",
+      "description": "Complete employee handbook with all policies",
+      "update_frequency": "annually"
+    },
+    {
+      "name": "benefits_guide",
+      "type": "document",
+      "description": "Benefits summary, enrollment guides, provider information",
+      "update_frequency": "annually"
+    },
+    {
+      "name": "onboarding_materials",
+      "type": "sharepoint",
+      "description": "New hire checklists, training schedules, welcome materials",
+      "update_frequency": "quarterly"
+    },
+    {
+      "name": "hr_faq",
+      "type": "document",
+      "description": "Frequently asked HR questions with answers",
+      "update_frequency": "monthly"
+    }
+  ],
+
+  "trust_config": {
+    "initial_level": 1.5,
+    "name": "Information Provider",
+    
+    "capabilities": {
+      "can_provide_information": true,
+      "can_search_policies": true,
+      "can_provide_links": true,
+      "can_guide_processes": true
+    },
+    
+    "restrictions": {
+      "cannot_modify_records": true,
+      "cannot_approve_requests": true,
+      "cannot_access_personal_data": true,
+      "cannot_make_commitments": true,
+      "cannot_discuss_other_employees": true
+    },
+    
+    "escalation_required": [
+      "salary_compensation",
+      "promotion_discussions",
+      "complaints_grievances",
+      "termination_questions",
+      "legal_matters",
+      "harassment_reports",
+      "accommodation_requests",
+      "performance_issues"
+    ],
+    
+    "response_guidelines": {
+      "always_cite_source": true,
+      "include_disclaimer": true,
+      "link_to_official_portal": true
+    }
+  },
+
+  "success_metrics": {
+    "primary": [
+      {
+        "name": "Query Resolution Rate",
+        "target": "70%",
+        "description": "Resolved without HR team involvement"
+      },
+      {
+        "name": "Employee Satisfaction",
+        "target": "4.5/5",
+        "description": "Feedback survey score"
+      },
+      {
+        "name": "Response Time",
+        "target": "<10 seconds",
+        "description": "Instant information access"
+      },
+      {
+        "name": "Policy Accuracy",
+        "target": "100%",
+        "description": "Verified against official sources"
+      }
+    ],
+    "secondary": [
+      {
+        "name": "HR Time Saved",
+        "target": "20 hours/week",
+        "description": "Reduction in routine inquiries"
+      },
+      {
+        "name": "Appropriate Escalations",
+        "target": "95%",
+        "description": "Sensitive topics correctly routed"
+      }
+    ]
+  },
+
+  "implementation_notes": "Focus on information-only capabilities. Never access or display personal employee data. Always route sensitive topics to HR. Include disclaimer that official decisions require HR consultation. Update knowledge base promptly when policies change."
+}

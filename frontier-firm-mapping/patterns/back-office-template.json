@@ -1,0 +1,188 @@
+{
+  "pattern_info": {
+    "name": "Back-Office Operations",
+    "pattern_number": 6,
+    "description": "AI agent for automating invoice processing, data entry, and administrative workflows",
+    "typical_horizon": "H2-H3",
+    "recommended_trust_level": "L2-L3",
+    "frontier_firm_reference": "Pattern 6 - Back-Office Operations Automation"
+  },
+
+  "agent_config": {
+    "name": "Operations Agent",
+    "description": "Processes invoices, validates data, routes approvals, and manages document workflows",
+    "icon": "📋",
+    "primary_language": "en-US",
+    "fallback_behavior": "Route to operations team",
+    "personality": "Precise, efficient, compliance-focused"
+  },
+
+  "topics": [
+    {
+      "name": "Invoice Processing",
+      "trigger_phrases": [
+        "Process invoice",
+        "New invoice received",
+        "Invoice status",
+        "Invoice approval"
+      ],
+      "flow_description": "Extract data, validate, match PO, route for approval",
+      "requires_action": "invoice_processing",
+      "trust_level": "L2-L3"
+    },
+    {
+      "name": "PO Matching",
+      "trigger_phrases": [
+        "Match purchase order",
+        "Find PO for invoice",
+        "PO lookup"
+      ],
+      "flow_description": "Match invoice to purchase order, flag discrepancies",
+      "requires_action": "po_matching",
+      "trust_level": "L3"
+    },
+    {
+      "name": "Approval Routing",
+      "trigger_phrases": [
+        "Route for approval",
+        "Who approves this",
+        "Approval workflow"
+      ],
+      "flow_description": "Determine approver based on amount and type",
+      "requires_action": "approval_routing",
+      "trust_level": "L2"
+    },
+    {
+      "name": "Exception Handling",
+      "trigger_phrases": [
+        "Invoice exception",
+        "PO mismatch",
+        "Over budget",
+        "Missing information"
+      ],
+      "flow_description": "Handle exceptions and route for human review",
+      "trust_level": "L2",
+      "requires_review": true
+    },
+    {
+      "name": "Status Inquiry",
+      "trigger_phrases": [
+        "Invoice status",
+        "Payment status",
+        "Where is my invoice"
+      ],
+      "flow_description": "Look up and report processing status",
+      "trust_level": "L3"
+    }
+  ],
+
+  "actions": [
+    {
+      "name": "invoice_processing",
+      "type": "ai_builder",
+      "description": "Extract invoice data using AI document processing",
+      "inputs": ["invoice_document"],
+      "outputs": ["vendor", "amount", "date", "line_items", "invoice_number"]
+    },
+    {
+      "name": "po_matching",
+      "type": "connector",
+      "system": "ERP",
+      "description": "Match invoice to purchase order",
+      "inputs": ["vendor", "amount", "po_number"],
+      "outputs": ["match_status", "variance", "po_details"]
+    },
+    {
+      "name": "approval_routing",
+      "type": "power_automate",
+      "description": "Route to appropriate approver based on rules",
+      "inputs": ["amount", "category", "department"],
+      "outputs": ["approver", "due_date"]
+    },
+    {
+      "name": "erp_update",
+      "type": "connector",
+      "system": "ERP / Accounting",
+      "description": "Update records in accounting system",
+      "requires_approval_above": 5000
+    }
+  ],
+
+  "trust_config": {
+    "initial_level": 2,
+    
+    "auto_process_L3": {
+      "conditions": [
+        "po_match_found",
+        "variance_under_threshold",
+        "approved_vendor",
+        "under_auto_approval_limit"
+      ],
+      "thresholds": {
+        "auto_approval_limit": 5000,
+        "variance_tolerance_percent": 5
+      }
+    },
+    
+    "require_review_L2": [
+      "no_po_match",
+      "new_vendor",
+      "over_threshold",
+      "budget_exceeded",
+      "variance_over_tolerance"
+    ],
+    
+    "escalate_immediately": [
+      "duplicate_invoice",
+      "suspected_fraud",
+      "compliance_flag",
+      "blocked_vendor"
+    ],
+    
+    "audit_requirements": {
+      "log_all_decisions": true,
+      "store_source_documents": true,
+      "maintain_approval_chain": true,
+      "retention_years": 7
+    }
+  },
+
+  "success_metrics": {
+    "primary": [
+      {
+        "name": "Straight-Through Processing",
+        "target": "70%",
+        "description": "Invoices processed without human intervention"
+      },
+      {
+        "name": "Processing Time",
+        "target": "80% reduction",
+        "description": "Time from receipt to payment ready"
+      },
+      {
+        "name": "Error Rate",
+        "target": "<1%",
+        "description": "Data extraction and matching errors"
+      },
+      {
+        "name": "Compliance Rate",
+        "target": "100%",
+        "description": "All required approvals obtained"
+      }
+    ],
+    "secondary": [
+      {
+        "name": "Cost per Invoice",
+        "target": "60% reduction",
+        "description": "Total processing cost"
+      },
+      {
+        "name": "Exception Rate",
+        "target": "<15%",
+        "description": "Invoices requiring manual review"
+      }
+    ]
+  },
+
+  "implementation_notes": "Requires AI Builder for document processing. Start with single invoice type before expanding. Ensure robust exception handling and audit trails. Consider compliance requirements (SOX, etc.) when designing approval workflows. Plan for extensive testing with historical invoices before go-live."
+}

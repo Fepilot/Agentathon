@@ -1,0 +1,245 @@
+{
+  "pattern_info": {
+    "name": "Customer Support",
+    "pattern_number": 4,
+    "description": "AI agent for handling customer inquiries, providing support, and managing service requests",
+    "typical_horizon": "H2",
+    "recommended_trust_level": "L2",
+    "frontier_firm_reference": "Pattern 4 - Customer Support Automation"
+  },
+
+  "agent_config": {
+    "name": "Customer Service Agent",
+    "description": "Handles customer inquiries, provides product information, and assists with common requests",
+    "icon": "🎫",
+    "primary_language": "en-US",
+    "fallback_behavior": "Escalate to human agent",
+    "personality": "Helpful, professional, empathetic"
+  },
+
+  "topics": [
+    {
+      "name": "Order Status",
+      "trigger_phrases": [
+        "Where is my order",
+        "Track my package",
+        "Order status",
+        "When will my order arrive",
+        "Shipping update",
+        "Delivery status"
+      ],
+      "flow_description": "Look up order by number, provide status and tracking",
+      "requires_action": "order_lookup",
+      "trust_level": "L3"
+    },
+    {
+      "name": "Return Request",
+      "trigger_phrases": [
+        "I want to return",
+        "Return policy",
+        "How do I return",
+        "Exchange item",
+        "Refund request"
+      ],
+      "flow_description": "Guide through return process, check eligibility, initiate return",
+      "requires_action": "return_processing",
+      "trust_level": "L2",
+      "escalation_triggers": ["outside_return_window", "high_value", "damaged"]
+    },
+    {
+      "name": "Product Information",
+      "trigger_phrases": [
+        "Tell me about",
+        "Product details",
+        "Product features",
+        "Is this available",
+        "Compare products"
+      ],
+      "flow_description": "Search product catalog, provide details and availability",
+      "knowledge_source": "product_catalog",
+      "trust_level": "L3"
+    },
+    {
+      "name": "Store Information",
+      "trigger_phrases": [
+        "Store hours",
+        "Location",
+        "Nearest store",
+        "Contact information",
+        "Holiday hours"
+      ],
+      "flow_description": "Provide store locations, hours, and contact details",
+      "knowledge_source": "store_directory",
+      "trust_level": "L3"
+    },
+    {
+      "name": "Payment Issues",
+      "trigger_phrases": [
+        "Payment failed",
+        "Card declined",
+        "Billing question",
+        "Update payment",
+        "Invoice request"
+      ],
+      "flow_description": "Troubleshoot payment issues, explain billing",
+      "trust_level": "L2",
+      "escalation_triggers": ["fraud_suspected", "large_amount"]
+    },
+    {
+      "name": "Complaint Handling",
+      "trigger_phrases": [
+        "I have a complaint",
+        "Not satisfied",
+        "Problem with service",
+        "Want to speak to manager",
+        "This is unacceptable"
+      ],
+      "flow_description": "Acknowledge concern, gather details, route appropriately",
+      "trust_level": "L1",
+      "auto_escalate": true
+    }
+  ],
+
+  "knowledge_sources": [
+    {
+      "name": "product_catalog",
+      "type": "sharepoint",
+      "description": "Product names, descriptions, specifications, pricing",
+      "update_frequency": "weekly"
+    },
+    {
+      "name": "faq_document",
+      "type": "document",
+      "description": "Top 50+ frequently asked questions with answers",
+      "update_frequency": "monthly"
+    },
+    {
+      "name": "policy_documents",
+      "type": "sharepoint",
+      "description": "Return policy, shipping policy, warranty terms",
+      "update_frequency": "as_needed"
+    },
+    {
+      "name": "store_directory",
+      "type": "dataverse",
+      "description": "Store locations, hours, contact information",
+      "update_frequency": "real_time"
+    }
+  ],
+
+  "actions": [
+    {
+      "name": "order_lookup",
+      "type": "connector",
+      "system": "Order Management System",
+      "description": "Retrieve order status by order number",
+      "inputs": ["order_number"],
+      "outputs": ["status", "tracking_number", "estimated_delivery"]
+    },
+    {
+      "name": "return_processing",
+      "type": "connector",
+      "system": "Returns System",
+      "description": "Check return eligibility, generate return label",
+      "inputs": ["order_number", "item_id", "reason"],
+      "outputs": ["eligible", "return_label", "instructions"],
+      "requires_approval": true
+    },
+    {
+      "name": "create_ticket",
+      "type": "connector",
+      "system": "CRM/Ticketing",
+      "description": "Create support ticket for escalation",
+      "inputs": ["customer_id", "issue_description", "priority"],
+      "outputs": ["ticket_number", "estimated_response"]
+    }
+  ],
+
+  "trust_config": {
+    "initial_level": 2,
+    "name": "Supervised Customer Service",
+    
+    "autonomous_actions_L3": [
+      "provide_product_information",
+      "look_up_order_status",
+      "share_policy_information",
+      "answer_faq_questions",
+      "provide_store_information"
+    ],
+    
+    "requires_approval_L2": [
+      "process_refund_over_threshold",
+      "create_exception",
+      "offer_discount",
+      "modify_order"
+    ],
+    
+    "always_escalate": [
+      "legal_mentions",
+      "threat_detected",
+      "vip_customer",
+      "media_mentions",
+      "repeated_complaints"
+    ],
+    
+    "escalation_triggers": {
+      "keywords": ["lawyer", "sue", "complaint", "manager", "supervisor", "unacceptable"],
+      "sentiment_threshold": -0.6,
+      "confidence_below": 0.7,
+      "repeat_attempts": 3
+    },
+    
+    "graduation_criteria": {
+      "to_L3": {
+        "min_interactions": 1000,
+        "approval_rate": 0.95,
+        "user_satisfaction": 4.5,
+        "min_days": 30
+      }
+    }
+  },
+
+  "success_metrics": {
+    "primary": [
+      {
+        "name": "Deflection Rate",
+        "target": "50%",
+        "description": "Percentage of inquiries resolved without human"
+      },
+      {
+        "name": "First Response Time",
+        "target": "<30 seconds",
+        "description": "Average time to first response"
+      },
+      {
+        "name": "Resolution Rate",
+        "target": "70%",
+        "description": "Percentage resolved in first contact"
+      },
+      {
+        "name": "Customer Satisfaction",
+        "target": "4.5/5",
+        "description": "Post-interaction survey score"
+      }
+    ],
+    "secondary": [
+      {
+        "name": "Escalation Accuracy",
+        "target": "90%",
+        "description": "Appropriate escalations"
+      },
+      {
+        "name": "Knowledge Base Coverage",
+        "target": "90%",
+        "description": "Questions answered from KB"
+      },
+      {
+        "name": "Average Handle Time",
+        "target": "<5 min",
+        "description": "For resolved conversations"
+      }
+    ]
+  },
+
+  "implementation_notes": "Start with information-only topics (product info, FAQs, store hours) before enabling transactional capabilities (returns, refunds). Ensure knowledge base is comprehensive before launch. Plan for 2-week shadowing period before going live."
+}
